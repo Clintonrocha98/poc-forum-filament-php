@@ -12,8 +12,8 @@
 ## Instalação
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone git@github.com:Clintonrocha98/poc-forum-filament-php.git
+cd poc-forum-filament-php
 
 composer install
 cp .env.example .env
@@ -24,7 +24,7 @@ php artisan key:generate
 php artisan migrate --seed
 
 npm install && npm run dev
-php artisan serve
+composer run dev
 ```
 
 Acesse `http://localhost:8000/admin` para acessar o painel Filament.
