@@ -7,9 +7,10 @@ use Livewire\Component;
 
 class CreatePostForm extends Component
 {
-
     public string $title = '';
+
     public string $content = '';
+
     public ?int $communityId = null;
 
     protected $rules = [
@@ -25,7 +26,7 @@ class CreatePostForm extends Component
             'title' => $this->title,
             'content' => $this->content,
             'user_id' => auth()->id(),
-            'community_id' => $this->communityId, 
+            'community_id' => $this->communityId,
             'slug' => str($this->title)->slug(),
         ]);
 
@@ -33,6 +34,7 @@ class CreatePostForm extends Component
         session()->flash('success', 'Postagem criada com sucesso!');
         $this->dispatch('post-created');
     }
+
     public function render()
     {
         return view('livewire.create-post-form');

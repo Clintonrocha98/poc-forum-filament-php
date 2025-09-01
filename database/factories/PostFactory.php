@@ -18,7 +18,7 @@ class PostFactory extends Factory
             'content' => $this->faker->paragraph(4),
             'user_id' => null,
             'community_id' => null,
-            'slug'=> str($title)->slug()
+            'slug' => str($title)->slug(),
         ];
     }
 }

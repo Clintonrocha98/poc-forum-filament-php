@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Community;
-use App\Models\Reply;
 use App\Models\Post;
+use App\Models\Reply;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@email.com',
-            'password' => '123'
+            'password' => '123',
         ]);
 
         $users = User::factory()->count(5)->create();

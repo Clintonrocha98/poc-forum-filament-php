@@ -8,7 +8,9 @@ use Livewire\Component;
 class ReplyForm extends Component
 {
     public int $postId;
+
     public ?int $parentId = null;
+
     public string $content = '';
 
     public int $replies_count = 0;
@@ -33,6 +35,7 @@ class ReplyForm extends Component
 
         session()->flash('success', 'Resposta enviada!');
     }
+
     public function render()
     {
         return view('livewire.reply-form');

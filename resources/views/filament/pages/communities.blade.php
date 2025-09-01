@@ -1,8 +1,8 @@
 <x-filament-panels::page>
   <div class="grid grid-cols-4 md:grid-cols-2 gap-4">
     @foreach ($communities as $community)
-    <a href="{{App\Filament\Pages\Posts::getUrl(['community' => $community->slug]) }}"
-      class="rounded-2xl shadow hover:shadow-lg transition overflow-hidden p-4 block bg-white dark:border-gray-700 dark:bg-gray-900 ">
+    <a href="{{App\Filament\Shared\Pages\Posts::getUrl(['community' => $community->slug]) }}"
+      class="rounded-xl shadow hover:shadow-lg transition overflow-hidden p-4 block bg-white dark:border-gray-700 dark:bg-gray-900 ">
       <div class="flex items-center justify-between gap-2">
       <div class="flex items-center gap-2">
         <img src="https://placehold.co/50x50?text={{ urlencode($community->name) }}" alt="{{ $community->name }}"

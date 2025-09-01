@@ -5,7 +5,6 @@ namespace App\Providers\Filament;
 use App\Filament\Shared\Pages\Communities;
 use App\Filament\Shared\Pages\Posts;
 use App\Models\Community;
-use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -23,23 +22,18 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider
+class GuestPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
-            ->login()
-            ->registration()
+            ->id('guest')
+            ->path('')
             ->colors([
                 'primary' => Color::Gray,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
+            ->discoverResources(in: app_path('Filament/Guest/Resources'), for: 'App\\Filament\\Guest\\Resources')
+            ->discoverPages(in: app_path('Filament/Shared/Pages'), for: 'App\\Filament\\Shared\\Pages')
             ->pages([
                 Communities::class,
             ])
@@ -49,10 +43,8 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-users'),
             ])
             ->navigationItems($this->getNavigationItems())
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->discoverWidgets(in: app_path('Filament/Guest/Widgets'), for: 'App\\Filament\\Guest\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
@@ -65,9 +57,6 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])
-            ->authMiddleware([
-                Authenticate::class,
             ]);
     }
 
@@ -76,6 +65,7 @@ class AdminPanelProvider extends PanelProvider
         if (! Schema::hasTable('communities')) {
             return [];
         }
+
         $communities = Community::withCount('posts')->get();
 
         return $communities->map(function ($community) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Shared\Pages;
 
 use App\Models\Post;
 use Filament\Pages\Page;
@@ -8,8 +8,11 @@ use Filament\Pages\Page;
 class PostView extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     protected static bool $shouldRegisterNavigation = false;
+
     protected static string $view = 'filament.pages.post';
+
     protected static ?string $slug = 'posts/{postSlug?}';
 
     public $post;
@@ -20,10 +23,10 @@ class PostView extends Page
             ->withCount('replies')
             ->with([
                 'author',
-                'replies' => fn($q) => $q
+                'replies' => fn ($q) => $q
                     ->with(['user', 'children.user'])
                     ->whereNull('parent_id')
-                    ->latest()
+                    ->latest(),
             ])
             ->firstOrFail();
     }

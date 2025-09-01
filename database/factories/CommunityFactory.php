@@ -18,7 +18,7 @@ class CommunityFactory extends Factory
 
         return [
             'name' => $name,
-            'slug' => str($name)->slug()
+            'slug' => str($name)->slug(),
         ];
     }
 }

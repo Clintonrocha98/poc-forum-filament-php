@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Shared\Pages;
 
 use App\Models\Community;
 use Filament\Pages\Page;
@@ -17,13 +17,8 @@ class Communities extends Page
 
     public $communities;
 
-
     public function mount(): void
     {
         $this->communities = Community::withCount('posts')->get();
     }
-
-
-
-
 }
